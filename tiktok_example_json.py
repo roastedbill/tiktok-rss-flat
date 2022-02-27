@@ -1,18 +1,14 @@
 from TikTokApi import TikTokApi
-import json
 
-api = TikTokApi.get_instance()
+api = TikTokApi()
 
 count = 1
 
-tiktoks = api.by_username("iamtabithabrown", count=count)
+for video in api.hashtag(name="funny").videos(count=count):
+    print(video)
 
-jsonString = json.dumps(tiktoks)
-jsonFile = open("tiktok_example_data.json", "w")
-jsonFile.write(jsonString)
-jsonFile.close()
 
-for tiktok in tiktoks:
-   # print(tiktok)
-    print(tiktok['video']['cover'])
-    
+user = api.user(username='rotififi')
+print(user.as_dict)
+for video in user.videos(count=count):
+    print(video)
